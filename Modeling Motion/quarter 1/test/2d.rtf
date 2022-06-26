@@ -1,0 +1,57 @@
+{\rtf1\ansi\ansicpg1252\deff0\uc1{\fonttbl{\f0\fcharset0 Times New Roman;}}{\colortbl
+;}{\stylesheet{\s0\nowidctlpar\nooverflow\sl240\slmult1\f0\fs20\kerning28 Normal
+;}}\paperw12240\paperh15840\margt1440\margl1800\margr1800\margb1440\deftab720\pgnstart1
+\viewkind1\viewscale100\fet0\pard\plain\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28
+{\header\pard\nowidctlpar\nooverflow\sl240\slmult1\tqc\tx4320\tqr\tx8640\par}\headery720
+{\footer\pard\nowidctlpar\nooverflow\sl240\slmult1\tqc\tx4320\tqr\tx8640\par}\footery864
+from math import *\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 from visual
+.graph import *\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 graph1 = 
+gdisplay(x=0, y=0, width=600, height=600, \par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28           
+title='2d', xtitle='t', ytitle='y', \par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28           
+xmax=10., xmin=-1., ymax=1000, ymin=-1)\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 yplot = gcurve
+(color=color.red)\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 tinitial = 
+0\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 tfinal =10
+\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 t=tinitial
+\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 y=20    #
+initial value of y\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 deltat=.005
+\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 while t<=
+tfinal:\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     yprime
+ = (100*e**t)/(1+e**t)\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     deltay
+ = deltat*yprime\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     yplot
+.plot(pos=(t,y))\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     t=t+deltat
+\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     y=y+deltay
+}}

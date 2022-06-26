@@ -1,0 +1,100 @@
+Week 2 Computing HomeworkModeling Motion
+Week 2 Computing Homework
+Due: Tuesday January 13
+The only thing you need to turn in is your modified version of the program in 
+exercise 4 and your answers to the two questions there. Just turn in a sheet of 
+paper with your program and answers. 
+You may be interested in looking at the Instant Hacking introduction to Python 
+as a good but short introduction to the language. I've listed it on the Python 
+Resources page.
+  Install Python: Go to http://vpython.org/download.html and download the 
+  packages needed for your platform. On windows there are files to download to 
+  your hard disk.Python-2.3.exe and VPython-2003-10-05.exe
+  These two files are programs you can execute on your computer to install 
+  Python and the VPython extensions. As noted on the download page, you should 
+  install Python first and you should be sure to let it install itself at the 
+  suggested place on your hardrive (C:\Python23). 
+  Verify Python is installed properly: Start up the development tool called 
+  "IDLE". It should be visible in Windows either as a shortcut on the desktop or 
+  in the Start menu (In the CAL look under Program Files->Development 
+  Tools->Python->IDLE). Try typing in the following short Python program from 
+  the lecture (or Cut & Paste). Remember the indention is important. Python 
+  doesn't care how much you indent the body of the 'for' loop but you must 
+  indent both of statements the same amount. Run the program either from the 
+  menu (Run->Run Module) or by hitting the F5 key.
+for t in range(11):
+    x = 2 + 3*t
+    print t,x
+
+  Verify VPython works properly: Try the following program which should draw a 
+  nice figure when executed. You can rotate and zoom the figure by dragging 
+  mouse on it with the right and middle buttons respectively. Try changing the 
+  values of numbers and see what happens. 
+from visual import *
+
+mything = curve(radius=1)
+angle=0;
+radius=20;
+
+while angle<=18.1*pi:
+    x=radius*cos(angle)
+    y=radius*sin(angle)
+    z=radius*sin((11/9.)*angle)
+    angle = angle + pi/10
+
+    red  =1+sin(pi/2+angle)/2
+    green=1+sin(3*pi/2+angle)/2
+    blue =1+sin(angle)/2
+
+    mything.append(pos=(x,y,z),color=(red,green,blue))
+    rate(30) #control the drawing speed
+
+
+  Doing physics in Python: The following program is similar to one shown in 
+  class. It prints a table of the displacements of a particle in uniform motion 
+  at several instants in time. This version uses a 'while' loop. Its slightly 
+  different than those we've seen before. The method we have seen before 
+  computes position x for any time t with a function ( x = f(t) = x0 + vt). This 
+  program computes how far the particle should move each time interval (&#916;x) and 
+  adds that to the particle's previous position. See if you can modify this 
+  program to make it simulate an object moving with uniform acceleration of -1 
+  meter per second per second. Recall that uniform acceleration means that 
+  during each time interval (&#916;t) the velocity changes by a constant amount. Use 
+  your program to answer these questions: 
+    What is the displacement of the particle at t=10 seconds? 
+    What is the displacement of the particle at t=20 seconds? 
+from visual import *
+
+x  =  0   # starting position
+v  =  5   # v is velocity in m/s
+t  =  0   # starting time in seconds
+dt =  1   # delta t, the change in time
+
+while t<=10 :
+      print t,x
+      x = x + v*dt
+      t = t +   dt
+
+  Solution
+#-----------------------------------------------
+# Uniform Acceleration - computes displacement of a particle undergoing uniform
+#                        acceleration in one dimension. 
+# Author: Barry Tolnas
+# Created: 1/7/04
+#-----------------------------------------------
+x  =  0   # starting position
+v  =  5   # v is velocity in m/s
+a  = -1   # a is the acceleration in m/s/s
+t  =  0   # starting time in seconds
+dt =  1   # delta t, the change in time
+
+while t<=20 :
+      print t,x
+      x = x + v*dt
+      v = v + a*dt
+      t = t +   dt
+
+
+    x=5 at time t=10 
+    x=-90 at time t=20 
+

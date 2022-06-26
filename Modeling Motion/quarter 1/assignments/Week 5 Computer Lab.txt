@@ -1,0 +1,12 @@
+Week 5 Computer LabWeek 5 Computer Lab
+Modeling Motion
+Due: February 3rd
+In the Lab we developed a two programs. One called gendata.py which asked the 
+user for a filename and a math function and output points along that function to 
+a data file. Then we worked on second program called differ.py (short for 
+"differentiate") which would read in the points from the data file, plot the 
+function, and estimate its derivative by computing the slope of the line 
+connecting one point to the next. The assignment is to modify this program to 
+try to compute a more accurate estimate of the derivative at each point by 
+computing the slope the line connecting the points immediately ahead and behind. 
+

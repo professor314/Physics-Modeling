@@ -1,0 +1,39 @@
+from visual import *
+from random import random
+
+scene.range = 1000
+numstars = 10
+galaxy_size = 1000
+G =6000
+dt =1.0/30
+def create_universe(N, size):
+    stars = []
+    for i in xrange(N):
+        star = sphere()
+        star.mass = random()*50
+        star.v = vector(0,0,0)
+        x=(random()-.5)*size
+        y=(random()-.5)*size
+        z=(random()-.5)*size
+        star.pos=(x,y,z)
+        star.radius = star.mass
+        red = random()
+        blue = random()
+        green = random()
+        star.color = (red, blue, green)
+        stars.append(star)
+    return stars
+
+stars = create_universe(numstars,galaxy_size)
+while true:
+    for star1 in stars:
+        fnet = vector(0,0,0,)
+        for star2 in stars:
+            r = star2.pos - star1.pos
+            if mag(r) > (star1.radius +star2.radius):
+                Fmag = G*star1.mass*star2.mass/mag(r)**2
+                fnet = Fmag*norm(r)
+        a = fnet/star1.mass
+        star1.v = star1.v + a*dt
+        star1.pos = star1.pos+star1.v*dt
+

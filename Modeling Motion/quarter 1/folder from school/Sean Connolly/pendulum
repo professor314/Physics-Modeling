@@ -1,0 +1,37 @@
+#Sean Connolly
+#Pendulum graph thing
+#week 7
+
+
+
+from visual.graph import *
+from math import*
+
+t=0
+g = 9.8  #gravity
+length = 2.  #length
+theta = 0  #angle
+thetaprime = 0
+w=4.4241#these digits are truncated but accurate
+
+dt=.001
+l=2
+deltaw=0
+
+wversustime = gcurve(color=color.blue)
+thetaversustime = gcurve(color=color.red)
+thetaversusw = gcurve(color=color.green)
+##graph1 = gdisplay(x=0, y=0, width=600, height=800, 
+##          xmax=10., xmin=-10., ymax=10, ymin=-10)
+
+while t<=10:
+    wprime= (-g/l)*(sin(theta))
+    thetaprime= w
+    deltaw = wprime*dt
+    deltatheta = thetaprime*dt
+    wversustime.plot(pos=(t, deltaw))
+    thetaversustime.plot(pos=(t, deltatheta))
+    thetaversusw.plot(pos=(theta, w))
+    t=dt+t
+    w = w + deltaw
+    theta = theta+ deltatheta

@@ -1,0 +1,48 @@
+{\rtf1\ansi\ansicpg1252\deff0\uc1{\fonttbl{\f0\fcharset0 Times New Roman;}}{\colortbl
+;}{\stylesheet{\s0\nowidctlpar\nooverflow\sl240\slmult1\f0\fs20\kerning28 Normal
+;}}\paperw12240\paperh15840\margt1440\margl1800\margr1800\margb1440\deftab720\pgnstart1
+\viewkind1\viewscale100\fet0\pard\plain\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28
+{\header\pard\nowidctlpar\nooverflow\sl240\slmult1\tqc\tx4320\tqr\tx8640\par}\headery720
+{\footer\pard\nowidctlpar\nooverflow\sl240\slmult1\tqc\tx4320\tqr\tx8640\par}\footery864
+from math import *\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 for a in (
+1,2,3,4):\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     upper
+_bound = a\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     lower
+_bound = 0\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     steps
+ = 1000\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     accumulation
+ = 0\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     numsteps
+ = 100000\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     deltax
+ = float((upper_bound - lower_bound))/numsteps\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     x = lower
+_bound\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     while
+ x <= a-.0000001:\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         deltaS
+ = sqrt(1+x**2)*deltax\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         accumulation
+ = accumulation+deltaS\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         x
+ += deltax\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     print
+ "length=",accumulation,"numsteps=",numsteps,"a=",a,x\par}
+
+}

@@ -1,0 +1,30 @@
+from visual.graph import *
+
+x0 =  [0,0]   # starting position
+v0 =  [5,0]   # v is velocity in m/s
+a  = [0,-1]   # a is the acceleration in m/s/s
+t  =  0       # starting time in seconds
+dt =  .125    # delta t, the change in time
+
+def displacement(t):
+    return x0[0] + v0[0]*t + a[1]*t*t/2.0
+
+def normalize(vec):
+    x=vec[0]
+    y=vec[1]
+    mag=sqrt(x*x+y*y)
+    return [x/mag, y/mag]
+
+graph = gdisplay()
+curve = gcurve()
+
+# For a slightly fancier graph replace the above lines with these:
+#graph = gdisplay(title="Uniform Acceleration", xtitle="displacement", ytitle="time")
+#curve = gcurve(color=(1,1,0))
+x=[0,0]
+while x>=0 :
+      print t,x
+      x = displacement(t)
+      curve.plot(pos=(t,x))
+      t = t+dt
+

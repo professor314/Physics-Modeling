@@ -1,0 +1,100 @@
+Richard Garcia
+Week 3 Computing Homework
+Due Jan. 20
+
+Exercise 1.
+	The final displacement at t=20 is -90.
+
+Exercise 2.
+	1. The final displacement at t=20 with a dt of .1 is -99.
+	2. The final displacement is lower with a dt of .1 than with a
+	   dt of 1.
+	3. The simulation with the smaller dt is more accurate as it
+	   increases the resolution of the simulation.
+
+Exercise 3.
+	The print statement doesn't print the value at t=20 anymore because
+	the print statement came before the variables were changed in the loop,
+	so in the original form of the program, after it printed out the value
+	at t=20, it altered the variables again.
+
+Exercise 4.
+	  dt	  x at 20s
+	--------------------
+	  1s	    -90
+	  .1s	    -99.0
+	  .01s	    -99.9
+	  .001s	    -99.99
+	  .0001s    -100.0005
+
+	1. x gradually gets closer to -100.
+	2. -100m.
+
+# Week 3 Exercises 1 - 4 program
+x  =  0   # starting position
+v  =  5   # v is velocity in m/s
+a  = -1   # a is the acceleration in m/s/s
+t  =  0   # starting time in seconds
+dt =  .1   # delta t, the change in time
+
+for dt in [1, .1, .01, .001, .0001]:
+    x=0
+    v=5
+    t=0
+    while t<(20) :          
+          x = x + v*dt
+          v = v + a*dt
+          t = t +   dt
+          
+    print dt,t,x
+
+Exercise 5.
+	def displacement(time):
+    		return 5*time + (-1 * time * time)/2.0
+
+Exercise 6.
+
+from visual.graph import *
+
+def displacement(time):
+    return 5*time + (-1 * time * time)/2.0
+
+graph = gdisplay()
+curve = gcurve()
+
+t = 0
+dt = 1
+
+while t <=20:
+    x=displacement(t)
+    curve.plot(pos=(t,x))
+    t += dt
+
+Exercise 7.
+
+from visual import *
+
+scene.range=10      #How many units wide the display window shows
+scene.center=(0,5,0)#The point in the center of the window
+
+v  = 0      #initial velocity
+t  = 0      #initial time
+dt = 1/30.0 # delta t
+y  = 10     # initial position
+
+#setup objects in the scene
+ball   = sphere(pos=(0,y,0), color=(1,0,0))
+ground = box(pos=(0,0,0), size=(20,.2,20), color=(0,1,0))
+
+print "ball radius=",ball.radius
+print "box thickness=",ground.size.y
+
+
+while t<20:	#Arbitrary change to better illustrate bouncing
+    ball.y = ball.y + v*dt
+    v = v - 9.8*dt
+    if ball.y <= (ball.radius+(ground.size.y/2)):
+        v = -v 
+    
+    t = t + dt
+    rate(1/dt)  #this controls the frame rate of animation

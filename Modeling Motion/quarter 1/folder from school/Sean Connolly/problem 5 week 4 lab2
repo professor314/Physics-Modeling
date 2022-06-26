@@ -1,0 +1,26 @@
+from visual.graph import *
+from math import *
+
+x  =  0  # starting position
+y = 0
+deltax = .125
+print x, y
+
+graph1 = gdisplay(x=0, y=0, xmax=21., xmin=0., ymax=.5, ymin=-.5)
+
+def f(x): return (sin(x))/x
+
+xcurve = gcurve(color=color.red)
+derivative = gcurve(color = color.green)
+xcurve.plot(pos=(x,y))
+
+a=pi
+
+for h in [1, 0.1, .001, .0001] :
+      #x = x+deltax
+      y = (sin(a))/a
+      #yprime = (x*cos(x) - sin(x)) / (x**2)
+      yprime = f(a+h)-f(a)/h
+      #xcurve.plot(pos=(x,y))
+      #derivative.plot(pos  = (x, yprime))
+      print x,y,yprime, h

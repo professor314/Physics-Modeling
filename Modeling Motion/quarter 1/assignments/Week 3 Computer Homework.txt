@@ -1,0 +1,122 @@
+Week 3 Computer HomeworkWeek 3 Computing Homework
+Modeling Motion
+Due: January 20
+The purpose of this week's homework is to get used to using Python as a language 
+and using it to simulate uniform acceleration. In particular, we will study two 
+possible ways of writing a simulation: 1) using numerical methods to compute 
+approximate values of a function, in this case then displacement function for 
+uniform acceleration and 2) computing the result directly using the equation 
+representing the exact solution. Note that in real systems, that equation is 
+often not known and the first method is the only one available. We will also 
+look at how to write a Python function, the 'if' statement and use some of the 
+graphical capability of VPython.
+Many of the exercises ask you to make small modifications to the same program. 
+The only thing you need to turn in is your answers to the questions and a 
+listing of your final program. Don't forget to "save early save often". 
+  We'll start with the program you worked on for this week's computing 
+  assignment--a simulation of a particle undergoing uniform acceleration.
+x  =  0   # starting position
+v  =  5   # v is velocity in m/s
+a  = -1   # a is the acceleration in m/s/s
+t  =  0   # starting time in seconds
+dt =  1   # delta t, the change in time
+
+while t<=20 :
+      print t,x
+      x = x + v*dt
+      v = v + a*dt
+      t = t +   dt
+
+  Cut and paste this Python code into IDLE and run it to make sure you copied it 
+  correctly. It should print out displacement values for times up to t=20. 
+  Record the final displacement at t=20.
+  Now change the program to simulate the results with a smaller time step, &#916;t, 
+  of 0.1 seconds instead of one second and rerun the simulation. You'll find 
+  that due to numerical approximations within the computer, the simulation won't 
+  go all the way up to 20 seconds unless you adjust the time limit up a little 
+  in the while statement's test (t<=20). Try adding dt on to the limit so it is 
+  one step higher than needed and change the '<=' (less than or equal) to just 
+  '<' (less than).
+  Questions 
+    What is the particle's final displacement after 20 seconds? 
+    How does it compare to the result from your first run with &#916;t=1s? 
+    How do you account for the different result? Which simulation was likely 
+    closer to the "real" answer and why do you think so? 
+  We're getting quite a lot of output when all we really care about is the final 
+  number at t=20s. Try moving the print statement down to the bottom of the 
+  program after the while loop has finished. Remember that Python uses indention 
+  to recognize what belongs in the body of the 'while' loop so you must remove 
+  the indention from the print statement. Now rerun the program. Why don't you 
+  get the value at t=20? Modify the program again to make it print out the value 
+  at t=20. 
+  Use your program to complete the following table: &#916;tx at 20s
+        1s 
+        .1s 
+        .01s 
+        .001s 
+        .0001s 
+
+  (Note: You could use a 'for' loop around your 'while' loop to change dt and 
+  rerun the while loop automatically.)
+  Questions 
+    As &#916;t decreases what happens to x? 
+    What do you think the "right" answer is? 
+  Recall the equation from your physics notes for uniform acceleration that 
+  relates final displacement as a function of time, initial position, initial 
+  velocity, and acceleration, x=x0+v0t+(1/2)at2. We should be able to use this 
+  equation instead of our numerical simulation to get a much more accurate 
+  approximation because this equation gives the exact solution. The only reason 
+  we can't get an exact answer from the computer is because it can't perform the 
+  calculations with 100% accuracy (but you can by hand on paper).
+  Define a Python function named displacement which uses this equation to 
+  compute displacement for a given time. There is an example of functions on the 
+  website HERE and you should check the Python Tutorial or a book for more 
+  examples. The function should allow the following program to run: 
+     print "The displacement at t=20 is",displacement(20)
+
+  Write a program using your displacement function to draw a graph of 
+  displacement over time for our particle. Use the SIR sample code which draws 
+  plots of the S, I, and R values from our epidemic model in calculus as an 
+  example of how to use the graphing functions in VPython. Also check the 
+  VPython documentation for information on using the graphing objects, gdisplay 
+  and gcurve. 
+  Now lets make a ball that bounces. The following program shows an animated 
+  ball dropping onto a box centered around the origin representing the ground. 
+  Its simulates 1.6 seconds of time and shows the ball falling right through the 
+  ground!. Modify this program to make the ball bounce off of the ground. To do 
+  this, check to see if the ball's position is low enough that it is touching 
+  the ground's surface or below. Keep in mind the ball's radius (1m) and the 
+  box's thickness (0.2m). If the ball is touching the box or is slightly 
+  intersecting it, change its velocity so it is moving at the same speed but in 
+  the opposite direction. (Hint: use an 'if' statement) 
+from visual import *
+
+scene.range=10      #How many units wide the display window shows
+scene.center=(0,5,0)#The point in the center of the window
+
+v  = 0      #initial velocity
+t  = 0      #initial time
+dt = 1/30.0 # delta t
+y  = 10     # initial position
+
+#setup objects in the scene
+ball   = sphere(pos=(0,y,0), color=(1,0,0))
+ground = box(pos=(0,0,0), size=(20,.2,20), color=(0,1,0))
+
+print "ball radius=",ball.radius
+print "box thickness=",ground.size.y
+
+while t<1.6:
+    ball.y = ball.y + v*dt
+    v = v - 9.8*dt
+    t = t + dt
+    rate(1/dt)  #this controls the frame rate of animation
+
+
+
+
+
+
+
+
+

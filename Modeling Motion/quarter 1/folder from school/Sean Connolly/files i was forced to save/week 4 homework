@@ -1,0 +1,34 @@
+from visual.graph import *
+from math import *
+
+x0 =  0   # starting position
+y0 = 0
+vy = 0
+vx =  5   # v is velocity in m/s
+xa  = -1   # a is the acceleration in m/s/s
+ya = -9.8
+t  =  0   # starting time in seconds
+dt =  1   # delta t, the change in time
+
+def displacementx(t):
+    return x0 + vx*t + xa*t*t/2.0
+def displacementy(t):
+    return y0+vy*t + ya*t*t/2.0
+
+graph = gdisplay()
+curvex = gcurve()
+curvey = gcurve()
+curveall = gcurve()
+
+# For a slightly fancier graph replace the above lines with these:
+#graph = gdisplay(title="Uniform Acceleration", xtitle="displacement", ytitle="time")
+#curve = gcurve(color=(1,1,0))
+
+while t<=20 :
+      x = displacementx(t)
+      y = displacementy(t)
+      curvex.plot(pos=(t,x))
+      curvey.plot(pos=(t,y))
+      curveall.plot(pos=(t, sqrt(x**2+y**2))
+      print "at t = ", t, "," , "displacement = " , sqrt(x**2 + y**2)
+      t = t+dt

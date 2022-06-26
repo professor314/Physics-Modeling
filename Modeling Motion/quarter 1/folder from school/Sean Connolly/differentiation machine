@@ -1,0 +1,40 @@
+#Sean Connolly
+#Python Homework
+#Week 6
+#2-10-04
+
+
+from math import *
+from string import *
+print "f(x) = "
+function = raw_input()
+coefficient1=""
+m = 0
+
+
+if function[0:] == "cosx":
+    print "f'(x) = -sin(x)"
+elif function[0:] == "sinx":
+    print "f'(x) = cosx"
+if function[0:]!= "sinx"or "cosx":
+    while function[m] <= len(function):
+        coefficient1 = coefficient1+function[m]
+        m = m+1
+
+    #if function[m] is an 'x' do this:
+        if function[m] == "x":
+            a = (str(atof(coefficient1)*atof(function[m+2]))+"x"+"^"+str(atof(function[m+2])-1))
+            print "f'(x) = ", a
+
+        if function[m] != "x":
+            a = (str(atof(coefficient1)*atof(function[m+2]))+function[m]+"^"+str(atof(function[m+2])-1))
+            print "f'(x) = ", a
+            print "next time please use the orthadox notation with x in place of",function[m]
+        if find(function,"+") == -1:
+            print "done"
+        if find(function, "+") != -1:
+            m = atof(find(function, "+"))+1  # this is to make our m whatever is after the nth + sign
+
+
+
+

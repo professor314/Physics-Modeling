@@ -1,0 +1,3 @@
+def displacement(x):
+    return (.5*-1*x*x)
+print "the displacement at t=20 is", displacement(20)

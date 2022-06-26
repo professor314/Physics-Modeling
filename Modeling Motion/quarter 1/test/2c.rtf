@@ -1,0 +1,46 @@
+{\rtf1\ansi\ansicpg1252\deff0\uc1{\fonttbl{\f0\fcharset0 Times New Roman;}}{\colortbl
+;}{\stylesheet{\s0\nowidctlpar\nooverflow\sl240\slmult1\f0\fs20\kerning28 Normal
+;}}\paperw12240\paperh15840\margt1440\margl1800\margr1800\margb1440\deftab720\pgnstart1
+\viewkind1\viewscale100\fet0\pard\plain\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28
+{\header\pard\nowidctlpar\nooverflow\sl240\slmult1\tqc\tx4320\tqr\tx8640\par}\headery720
+{\footer\pard\nowidctlpar\nooverflow\sl240\slmult1\tqc\tx4320\tqr\tx8640\par}\footery864
+from visual.graph import *\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 from math
+ import *\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 graph1 = 
+gdisplay(x=0, y=0, width=600, height=800, \par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28           
+title='2c', xtitle='time', ytitle='P(t)', \par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28           
+xmax=11., xmin=0, ymax=120, ymin=-2)\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 A = .25\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 t=0\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 deltat = .
+125\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 line = gcurve
+(color=color.cyan)\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 while t<=
+10:\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     function
+ = (100.*A*e**t)/(1.+A*e**t)\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     line.
+plot(pos=(t,function))\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     t+=deltat
+\par}
+
+}

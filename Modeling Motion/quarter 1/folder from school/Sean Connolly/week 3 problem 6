@@ -1,0 +1,21 @@
+from visual.graph import *
+from math import *
+
+x  =  0   # starting position
+y = 0
+deltax = .1
+
+print x,y
+
+graph = gdisplay()
+
+graph1 = gdisplay(x=0, y=0, xmax=21., xmin=0., ymax=.5, ymin=-.5)
+
+
+vcurve = gcurve(color=color.red)
+
+while x<=20 :
+      print x,y
+      x = x+deltax
+      y = (sin(x))/x
+      vcurve.plot(pos=(x,y))

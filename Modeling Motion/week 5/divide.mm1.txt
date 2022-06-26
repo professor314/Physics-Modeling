@@ -1,0 +1,10 @@
+# Divide the two nuumbers at memory address 32 and 33
+00 LD  32 r0
+01 LD  33 r1
+02 DIV r0 r1 r2
+# Store the result at memory address 63
+03 ST  r2  63
+04 HALT
+
+32 DATA 8
+33 DATA 4

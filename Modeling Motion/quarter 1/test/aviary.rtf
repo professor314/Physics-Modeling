@@ -1,0 +1,65 @@
+{\rtf1\ansi\ansicpg1252\deff0\uc1{\fonttbl{\f0\fcharset0 Times New Roman;}}{\colortbl
+;}{\stylesheet{\s0\nowidctlpar\nooverflow\sl240\slmult1\f0\fs20\kerning28 Normal
+;}}\paperw12240\paperh15840\margt1440\margl1800\margr1800\margb1440\deftab720\pgnstart1
+\viewkind1\viewscale100\fet0\pard\plain\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28
+{\header\pard\nowidctlpar\nooverflow\sl240\slmult1\tqc\tx4320\tqr\tx8640\par}\headery720
+{\footer\pard\nowidctlpar\nooverflow\sl240\slmult1\tqc\tx4320\tqr\tx8640\par}\footery864
+from string import *\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 class Bird
+:\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     def __
+init__(self,name,fly='no',land='yes'):\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         self
+.name = name\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         self
+.land=land\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         self
+.fly=fly\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         print
+ "Hi, I'm", self.name\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     def fly
+(self):\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         if
+ self.fly == 'yes':\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28             
+print self.name, "is already flying"\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         if
+ self.fly != 'yes':\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28             
+self.fly = 'yes'\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28             
+print self.name, "is now flying"\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     def land
+(self):\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         if
+ self.land =='yes':\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28             
+print self.name, "already perched"\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         if
+ self.land !='yes':\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28             
+self.land = 'yes'\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28             
+print self.name, "landed"\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28\par}
+
+}

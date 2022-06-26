@@ -1,0 +1,133 @@
+{\rtf1\ansi\ansicpg1252\deff0\uc1{\fonttbl{\f0\fcharset0 Times New Roman;}}{\colortbl
+;}{\stylesheet{\s0\nowidctlpar\nooverflow\sl240\slmult1\f0\fs20\kerning28 Normal
+;}}\paperw12240\paperh15840\margt1440\margl1800\margr1800\margb1440\deftab720\pgnstart1
+\viewkind1\viewscale100\fet0\pard\plain\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28
+{\header\pard\nowidctlpar\nooverflow\sl240\slmult1\tqc\tx4320\tqr\tx8640\par}\headery720
+{\footer\pard\nowidctlpar\nooverflow\sl240\slmult1\tqc\tx4320\tqr\tx8640\par}\footery864
+#This is my program:\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 r=150\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 f=10\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 a=.6\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 b=-.04\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 c=-.2\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 d=.002\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 rprime=(a
++b*f)*r\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 fprime=(c
++d*r)*f\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 t=0\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 finalt = 
+20\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 deltat=.0001
+\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 rnew =0\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 fnew= 0\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 rmax=r\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 fmax=f\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 rmin=0\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 fmin=0\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 ##deltatlist
+ = [1,.1,.01,.001,.0001,.00001,.000001,.0000001]\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 ##deltat=
+deltatlist[0]\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 ##n=0\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 ##\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 ##while deltatlist
+[n]!=deltatlist[7]: \par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 while t < 
+finalt:\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     rnew=
+r+rprime*deltat\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     fnew=
+f+fprime*deltat\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     if rnew
+>=r:\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         rmax
+ = rnew\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     if fnew
+ >= f:\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         fmax
+ =fnew\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     if rnew
+<=r:\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         rmin
+=rnew\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     if fnew
+<=f:\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28         fmin
+=fnew\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     r = rnew
+\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     f = fnew
+\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     t=t+deltat
+\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     rprime
+ = (a+(b*f))*r\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     fprime
+ = (c+(d*r))*f\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28     \par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 ##n=n+1\par
+}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 ##deltat=
+deltatlist[n]\par}
+
+\pard\nowidctlpar\nooverflow\sl240\slmult1{\f0\lang1033\fs20\kerning28 print "rabbits
+ =", r,",", "foxes =", f,",", "time = ", t, "deltat =", deltat, rmax, fmax, rmin
+, fmin\par}
+
+}

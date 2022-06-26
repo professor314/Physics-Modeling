@@ -1,0 +1,10 @@
+# Add the numbers stored at memory address 32 and 33
+# Store the sum at memory address 63
+00 LD  32 r0
+01 LD  33 r1
+02 ADD r0 r1 r2
+03 ST  r2 63
+04 HALT
+
+32 DATA 2
+33 DATA 3

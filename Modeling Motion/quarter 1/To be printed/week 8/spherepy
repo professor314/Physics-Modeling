@@ -1,0 +1,13 @@
+from math import *
+from visual import *
+deltax = .0001
+x=-3.
+xfinal = 3.
+Volume = 0.
+sum = 0.
+while x<=xfinal:
+    r = sqrt(9.-(x**2.))
+    sum = r**2*pi*deltax #=volume of this disc(cylinder Volume = 
+    Volume += sum
+    x+=deltax
+print Volume
