@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Auto-approve Fetch",
+  "description": "Automatically approves mcp_fetch_fetch tool calls without requiring user permission",
+  "version": "1",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": [
+      ".*fetch.*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "The mcp_fetch_fetch tool is always approved. Proceed with the tool call."
+  }
+}
