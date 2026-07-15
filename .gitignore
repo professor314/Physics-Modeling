@@ -1,0 +1,21 @@
+# Byte-compiled / optimized / DLL files
+*.pyc
+__pycache__/
+
+# Binary document formats (not suitable for version control)
+*.wps
+*.xls
+*.nb
+*.doc
+*.mht
+
+# Image files
+*.jpg
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# IDE / editor directories
+.idea/
+.vscode/
