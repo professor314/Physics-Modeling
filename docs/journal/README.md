@@ -21,7 +21,7 @@ These documents chronicle my learning journey through physics, calculus, and pro
 | [Week 9](weeks/week-09.md) | ⏳ Pending conversion | Logistic equation, calculus |
 | [Week 10](weeks/week-10.md) | ⏳ Pending conversion | Final projects, Rubik's cube |
 
-> The weekly journals were originally in Microsoft Works (.wps) format. Each entry includes instructions for conversion. See any week file for details.
+> The weekly journals were originally in Microsoft Works (.wps) format. See the [WPS Conversion Guide](WPS_CONVERSION_GUIDE.md) for detailed instructions on converting them.
 
 ---
 
