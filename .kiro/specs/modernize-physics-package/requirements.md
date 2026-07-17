@@ -10,10 +10,10 @@ The guiding philosophy is **preservation**: this is the user's original work and
 
 - **Original_Code**: The Python source files written by the user during the Modeling Motion course (2004), including assignments, personal projects like the Rubik's cube, and test programs
 - **Repository**: The top-level Git repository containing all project files
-- **Compatibility_Shim**: A thin Python module that maps legacy `visual` module imports to their modern `vpython` equivalents, allowing Original_Code to run with minimal edits
+- **Compatibility_Shim**: A thin Python package that maps legacy `visual` module imports to matplotlib-based equivalents, allowing Original_Code to run on modern Python (3.10+) without vpython
 - **Journal_Entry**: A weekly reflection document written during the course (stored as .wps files in Microsoft Works binary format from 2004)
 - **Evaluation_Worksheet**: A quarterly self-assessment document (stored as .rtf files) reflecting on learning goals, challenges, and accomplishments
-- **VPython**: The modern Python 3 package (`vpython`) that replaces the legacy `visual` module for 3D physics visualizations
+- **VPython**: The legacy Python 3D visualization library used in the original code. The modernized project replaces vpython with matplotlib for compatibility with Python 3.10+
 - **Syntax_Fix**: A minimal change to Original_Code that updates Python 2 syntax to Python 3 without altering logic, structure, or style
 
 ## Requirements
@@ -48,15 +48,18 @@ The guiding philosophy is **preservation**: this is the user's original work and
 
 ### Requirement 3: Visualization Compatibility
 
-**User Story:** As a developer, I want my VPython simulations to work with the modern `vpython` package, so that I can demonstrate them running without installing a 20-year-old library.
+**User Story:** As a developer, I want my VPython simulations to work on modern Python (3.10+) using matplotlib for visualization, so that anyone can run them without installing deprecated or version-incompatible libraries.
 
 #### Acceptance Criteria
 
-1. WHEN Original_Code uses `from visual import *` or `from visual.graph import *`, THE Compatibility_Shim SHALL allow those imports to resolve to modern `vpython` equivalents
-2. THE Repository SHALL provide a `compat/visual.py` shim module that re-exports vpython objects under their legacy names
-3. WHEN a legacy VPython API differs from the modern vpython API (e.g., `frame` objects removed in modern vpython), THE Compatibility_Shim SHALL document the incompatibility and provide a workaround where feasible
-4. IF a simulation cannot run through the Compatibility_Shim due to fundamental API differences, THEN THE Repository SHALL document which simulations are affected and what would be needed to fix them
-5. THE Compatibility_Shim SHALL NOT modify Original_Code files; it SHALL work by being placed on the Python import path ahead of any missing `visual` module
+1. WHEN Original_Code uses `from visual import *` or `from visual.graph import *`, THE Compatibility_Shim SHALL allow those imports to resolve to a matplotlib-based rendering backend instead of vpython
+2. THE Repository SHALL provide a `compat/visual/` shim package that re-exports common VPython object names (`sphere`, `box`, `cylinder`, `curve`, `vector`, `color`, `rate`, `scene`) as matplotlib 3D equivalents
+3. THE Compatibility_Shim SHALL provide a `compat/visual/graph.py` module that maps `gdisplay`, `gcurve`, and `gvbars` to matplotlib 2D plotting equivalents
+4. THE Compatibility_Shim SHALL render 3D simulations using matplotlib's `mpl_toolkits.mplot3d` with animation support (rotatable, zoomable view)
+5. THE Compatibility_Shim SHALL render 2D graph-based simulations using standard matplotlib figures with real-time updates
+6. WHEN a legacy VPython API has no matplotlib equivalent (e.g., `frame` object grouping), THE Compatibility_Shim SHALL provide a stub that tracks position/axis without crashing, and document the limitation
+7. THE Compatibility_Shim SHALL NOT require vpython as a dependency; it SHALL depend only on matplotlib and numpy
+8. THE Repository SHALL NOT require users to install vpython or use a specific Python version older than 3.10
 
 ### Requirement 4: Journal and Evaluation Compilation
 
