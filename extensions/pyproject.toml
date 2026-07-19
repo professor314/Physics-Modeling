@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "physics-modeling"
+version = "0.1.0"
+description = "A modern Python physics simulation library featuring numerical integrators, oscillators, gravity, collisions, epidemics, and more."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Sean Connolly"}
+]
+
+dependencies = [
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "hypothesis>=6.0",
+    "hypothesis[numpy]",
+    "mypy>=1.5",
+    "ruff>=0.1",
+    "pytest-cov>=4.0",
+]
+notebook = [
+    "jupyter",
+    "ipywidgets",
+]
+3d = [
+    "pyvista",
+]
+rubiks = [
+    "kociemba",
+]
+
+[project.scripts]
+physics-modeling = "physics_modeling.cli.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["physics_modeling*"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["physics_modeling"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+plugins = []
+
+[[tool.mypy.overrides]]
+module = [
+    "matplotlib.*",
+    "hypothesis.*",
+    "numpy.*",
+    "pyvista.*",
+    "plotly.*",
+    "kociemba.*",
+    "ipywidgets.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
