@@ -166,7 +166,7 @@ This plan reorganizes a 2004-era college physics project into a clean, portfolio
   - This is NOT a distributable package — just documents the runtime requirement
   - _Requirements: 3.2_
 
-- [-] 18. Final cleanup and verification
+- [x] 18. Final cleanup and verification
   - Verify no .pyc, .wps, .xls, .nb, .doc, .mht files are tracked in Git
   - Verify the old `Modeling Motion/` directory is fully removed (all content relocated)
   - Verify `temp_clone/` directory is removed if present

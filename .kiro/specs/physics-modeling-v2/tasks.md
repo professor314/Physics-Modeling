@@ -173,8 +173,8 @@ Platform: Windows, PowerShell, `py` command. Python 3.10+ (user has 3.14).
     - Handle headless gracefully (compute-only mode)
     - _Requirements: 17.1, 17.2, 17.4, 17.5_
 
-- [ ] 10. Final integration and package validation
-  - [-] 10.1 Wire all components together and validate package installation
+- [x] 10. Final integration and package validation
+  - [x] 10.1 Wire all components together and validate package installation
     - Ensure `pip install -e .` works from `extensions/` directory
     - Verify `from physics_modeling.core import Simulation, RK4Integrator` imports work
     - Verify `from physics_modeling.oscillators import SpringPendulum` imports work
@@ -183,37 +183,37 @@ Platform: Windows, PowerShell, `py` command. Python 3.10+ (user has 3.14).
     - Run ruff and mypy checks
     - _Requirements: 1.1, 1.2, 23.1, 23.2_
 
-- [~] 11. Final checkpoint — Phase 1 complete
+- [x] 11. Final checkpoint — Phase 1 complete
   - Ensure all tests pass, ruff + mypy pass, package installs cleanly. Ask the user if questions arise.
 
 ---
 
 ### Phase 2: Remaining Physics Simulations (Future)
 
-- [ ] 12. Implement remaining physics modules
-  - [~] 12.1 Implement Logistic Equation and Riemann Sums (calculus/)
+- [x] 12. Implement remaining physics modules
+  - [x] 12.1 Implement Logistic Equation and Riemann Sums (calculus/)
     - Logistic equation with analytical solution comparison
     - Riemann sums with left/right/midpoint/trapezoid methods and rectangle visualization
     - Property tests for Properties 3 (logistic case) and 8 (monotone convergence)
     - _Requirements: 10.1–10.5, 12.1–12.6_
 
-  - [~] 12.2 Implement Lissajous Figures (oscillators/lissajous.py)
+  - [x] 12.2 Implement Lissajous Figures (oscillators/lissajous.py)
     - Parametric curve generation with 3D gradient coloring
     - Property tests for Properties 7 (closure) and 18 (formula correctness)
     - _Requirements: 11.1–11.5_
 
-  - [~] 12.3 Implement Elastic Collisions (collisions/elastic.py)
+  - [x] 12.3 Implement Elastic Collisions (collisions/elastic.py)
     - 2D and 3D collision detection and elastic resolution
     - Property test for Property 4 (momentum + energy conservation)
     - _Requirements: 6.1–6.6_
 
-  - [~] 12.4 Implement Hard Sphere Gas (gas/hard_sphere.py)
+  - [x] 12.4 Implement Hard Sphere Gas (gas/hard_sphere.py)
     - N-particle hard sphere simulation with event-driven collisions
     - Thermodynamic measurements (temperature, pressure)
     - Property test for Property 17 (kinetic energy conservation)
     - _Requirements: 7.1–7.5_
 
-  - [~] 12.5 Implement Double Pendulum, N-Body, and SEIR
+  - [x] 12.5 Implement Double Pendulum, N-Body, and SEIR
     - Double pendulum with Lagrangian equations and chaos demonstration
     - N-body gravitational with Verlet integration and softening
     - SEIR extension of SIR with exposed compartment

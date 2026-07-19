@@ -1,0 +1,99 @@
+Metadata-Version: 2.4
+Name: physics-modeling
+Version: 0.1.0
+Summary: A modern Python physics simulation library featuring numerical integrators, oscillators, gravity, collisions, epidemics, and more.
+Author: Sean Connolly
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.24
+Requires-Dist: matplotlib>=3.7
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: hypothesis>=6.0; extra == "dev"
+Requires-Dist: hypothesis[numpy]; extra == "dev"
+Requires-Dist: mypy>=1.5; extra == "dev"
+Requires-Dist: ruff>=0.1; extra == "dev"
+Requires-Dist: pytest-cov>=4.0; extra == "dev"
+Provides-Extra: notebook
+Requires-Dist: jupyter; extra == "notebook"
+Requires-Dist: ipywidgets; extra == "notebook"
+Provides-Extra: 3d
+Requires-Dist: pyvista; extra == "3d"
+Provides-Extra: rubiks
+Requires-Dist: kociemba; extra == "rubiks"
+
+# physics-modeling
+
+A modern Python physics simulation library featuring numerical integrators (Euler, RK4, Verlet), oscillators, gravity, collisions, gas dynamics, epidemics, and more. Built as the professional rewrite of the original Modeling Motion coursework.
+
+## Installation
+
+### Basic install (from this directory)
+
+```bash
+pip install -e .
+```
+
+### With development tools (testing, linting, type checking)
+
+```bash
+pip install -e ".[dev]"
+```
+
+### With Jupyter notebook support
+
+```bash
+pip install -e ".[notebook]"
+```
+
+### With 3D visualization (PyVista)
+
+```bash
+pip install -e ".[3d]"
+```
+
+### With Rubik's cube solver
+
+```bash
+pip install -e ".[rubiks]"
+```
+
+## Quick Start
+
+```python
+from physics_modeling.core import Simulation, RK4Integrator
+from physics_modeling.oscillators import SpringPendulum
+```
+
+## CLI Usage
+
+After installation, run simulations from the command line:
+
+```bash
+physics-modeling spring-pendulum
+physics-modeling gravity
+physics-modeling sir
+```
+
+## Development
+
+```bash
+# Install with dev dependencies
+pip install -e ".[dev]"
+
+# Run tests
+pytest tests/ -v
+
+# Type checking
+mypy physics_modeling/
+
+# Linting
+ruff check physics_modeling/
+```
+
+## Requirements
+
+- Python >= 3.10
+- numpy >= 1.24
+- matplotlib >= 3.7

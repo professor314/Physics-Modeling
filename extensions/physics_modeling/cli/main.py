@@ -6,7 +6,15 @@ Usage::
 
     physics-modeling spring-pendulum
     physics-modeling gravity
+    physics-modeling double-pendulum
+    physics-modeling nbody
     physics-modeling sir
+    physics-modeling seir
+    physics-modeling logistic
+    physics-modeling lissajous
+    physics-modeling riemann
+    physics-modeling collisions
+    physics-modeling gas
     physics-modeling list
 """
 
@@ -16,11 +24,19 @@ import argparse
 import sys
 
 
-SIMULATIONS = {
+SIMULATIONS: dict[str, str] = {
     "spring-pendulum": "3D spring pendulum with interactive sliders",
+    "double-pendulum": "2D double pendulum with chaotic motion + trail",
     "gravity": "3D bouncing objects under gravity (fountain mode)",
     "bouncing": "Alias for 'gravity'",
+    "nbody": "3D N-body gravitational simulation (binary star + particle)",
     "sir": "2D SIR epidemic model with parameter sliders",
+    "seir": "2D SEIR epidemic model with parameter sliders",
+    "logistic": "2D logistic growth equation visualization",
+    "lissajous": "3D Lissajous figure visualization",
+    "riemann": "2D Riemann sum visualization with interactive controls",
+    "collisions": "Elastic collision simulation visualization",
+    "gas": "Ideal gas hard-sphere simulation visualization",
 }
 
 
@@ -28,6 +44,7 @@ def _check_display() -> bool:
     """Return True if matplotlib can display a window."""
     try:
         import matplotlib
+
         backend = matplotlib.get_backend()
         # Non-interactive backends that can't show windows
         headless_backends = {"agg", "pdf", "svg", "ps", "cairo", "template"}
@@ -43,6 +60,13 @@ def _run_spring_pendulum() -> None:
     run_spring_pendulum_3d()
 
 
+def _run_double_pendulum() -> None:
+    """Launch the double pendulum 2D visualization."""
+    from physics_modeling.oscillators.double_pendulum_viz import run_double_pendulum_2d
+
+    run_double_pendulum_2d()
+
+
 def _run_bouncing() -> None:
     """Launch the bouncing gravity 3D visualization."""
     from physics_modeling.gravity.bouncing_viz import run_bouncing_3d
@@ -50,11 +74,60 @@ def _run_bouncing() -> None:
     run_bouncing_3d()
 
 
+def _run_nbody() -> None:
+    """Launch the N-body gravitational 3D visualization."""
+    from physics_modeling.gravity.nbody_viz import run_nbody_3d
+
+    run_nbody_3d()
+
+
 def _run_sir() -> None:
     """Launch the SIR epidemic 2D visualization."""
     from physics_modeling.epidemics.sir_viz import run_sir_2d
 
     run_sir_2d()
+
+
+def _run_seir() -> None:
+    """Launch the SEIR epidemic 2D visualization."""
+    from physics_modeling.epidemics.seir_viz import run_seir_2d
+
+    run_seir_2d()
+
+
+def _run_logistic() -> None:
+    """Launch the logistic equation 2D visualization."""
+    from physics_modeling.calculus.logistic_viz import run_logistic_2d
+
+    run_logistic_2d()
+
+
+def _run_lissajous() -> None:
+    """Launch the Lissajous figure 3D visualization."""
+    from physics_modeling.oscillators.lissajous_viz import run_lissajous_3d
+
+    run_lissajous_3d()
+
+
+def _run_riemann() -> None:
+    """Launch the Riemann sum 2D visualization."""
+    from physics_modeling.calculus.riemann_viz import run_riemann_2d
+
+    run_riemann_2d()
+
+
+def _run_collisions() -> None:
+    """Launch the elastic collisions visualization."""
+    from physics_modeling.collisions.collisions_viz import run_collisions_2d
+
+    run_collisions_2d()
+
+
+def _run_gas() -> None:
+    """Launch the ideal gas simulation visualization."""
+    from physics_modeling.gas.gas_viz import run_gas_2d
+
+    run_gas_2d()
 
 
 def _list_simulations() -> None:
@@ -80,6 +153,11 @@ def main() -> None:
     )
 
     subparsers.add_parser(
+        "double-pendulum",
+        help="Launch 2D double pendulum with chaotic motion and trail",
+    )
+
+    subparsers.add_parser(
         "gravity",
         help="Launch 3D bouncing objects under gravity (fountain mode)",
     )
@@ -90,8 +168,43 @@ def main() -> None:
     )
 
     subparsers.add_parser(
+        "nbody",
+        help="Launch 3D N-body gravitational simulation",
+    )
+
+    subparsers.add_parser(
         "sir",
         help="Launch 2D SIR epidemic model with parameter sliders",
+    )
+
+    subparsers.add_parser(
+        "seir",
+        help="Launch 2D SEIR epidemic model with parameter sliders",
+    )
+
+    subparsers.add_parser(
+        "logistic",
+        help="Launch 2D logistic growth equation visualization",
+    )
+
+    subparsers.add_parser(
+        "lissajous",
+        help="Launch 3D Lissajous figure visualization",
+    )
+
+    subparsers.add_parser(
+        "riemann",
+        help="Launch 2D Riemann sum visualization",
+    )
+
+    subparsers.add_parser(
+        "collisions",
+        help="Launch elastic collision simulation visualization",
+    )
+
+    subparsers.add_parser(
+        "gas",
+        help="Launch ideal gas hard-sphere simulation visualization",
     )
 
     subparsers.add_parser(
@@ -119,12 +232,27 @@ def main() -> None:
         )
         sys.exit(1)
 
-    if args.command == "spring-pendulum":
-        _run_spring_pendulum()
-    elif args.command in ("gravity", "bouncing"):
-        _run_bouncing()
-    elif args.command == "sir":
-        _run_sir()
+    dispatch: dict[str, callable] = {  # type: ignore[type-arg]
+        "spring-pendulum": _run_spring_pendulum,
+        "double-pendulum": _run_double_pendulum,
+        "gravity": _run_bouncing,
+        "bouncing": _run_bouncing,
+        "nbody": _run_nbody,
+        "sir": _run_sir,
+        "seir": _run_seir,
+        "logistic": _run_logistic,
+        "lissajous": _run_lissajous,
+        "riemann": _run_riemann,
+        "collisions": _run_collisions,
+        "gas": _run_gas,
+    }
+
+    handler = dispatch.get(args.command)
+    if handler is not None:
+        handler()
+    else:
+        parser.print_help()
+        sys.exit(1)
 
 
 if __name__ == "__main__":
