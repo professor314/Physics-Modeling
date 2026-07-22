@@ -15,6 +15,7 @@ Usage::
     physics-modeling riemann
     physics-modeling collisions
     physics-modeling gas
+    physics-modeling rubiks-cube
     physics-modeling list
 """
 
@@ -37,6 +38,7 @@ SIMULATIONS: dict[str, str] = {
     "riemann": "2D Riemann sum visualization with interactive controls",
     "collisions": "Elastic collision simulation visualization",
     "gas": "Ideal gas hard-sphere simulation visualization",
+    "rubiks-cube": "Interactive 3D Rubik's cube with keyboard controls",
 }
 
 
@@ -130,6 +132,13 @@ def _run_gas() -> None:
     run_gas_2d()
 
 
+def _run_rubiks_cube() -> None:
+    """Launch the interactive 3D Rubik's cube visualization."""
+    from physics_modeling.rubiks_cube.cube_viz import run_rubiks_cube
+
+    run_rubiks_cube()
+
+
 def _list_simulations() -> None:
     """Print available simulations to stdout."""
     print("Available simulations:\n")
@@ -208,6 +217,11 @@ def main() -> None:
     )
 
     subparsers.add_parser(
+        "rubiks-cube",
+        help="Launch interactive 3D Rubik's cube with keyboard controls",
+    )
+
+    subparsers.add_parser(
         "list",
         help="List all available simulations",
     )
@@ -245,6 +259,7 @@ def main() -> None:
         "riemann": _run_riemann,
         "collisions": _run_collisions,
         "gas": _run_gas,
+        "rubiks-cube": _run_rubiks_cube,
     }
 
     handler = dispatch.get(args.command)

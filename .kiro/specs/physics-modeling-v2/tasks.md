@@ -225,18 +225,18 @@ Platform: Windows, PowerShell, `py` command. Python 3.10+ (user has 3.14).
 ### Phase 3: Rubik's Cube Application (Future)
 
 - [ ] 13. Implement Rubik's Cube full application
-  - [~] 13.1 Implement cube state representation and move system
+  - [x] 13.1 Implement cube state representation and move system
     - `CubeState` with (6,3,3) facelet array, `Move` enum, `apply_move()`, `apply_sequence()`
     - Validation (solvability check), `inverse_move()`, `inverse_sequence()`
     - _Requirements: 14.1, 14.2, 14.3, 14.4_
 
-  - [~] 13.2 Implement solver, scrambler, and timer
+  - [ ] 13.2 Implement solver, scrambler, and timer
     - Kociemba solver integration, scramble generator (20-25 moves, no same-face consecutive)
     - Timer measuring from first move to solved-state detection
     - Property tests for Properties 9 (round-trip), 10 (state validity), 11 (scramble constraints)
     - _Requirements: 14.5, 14.9, 14.10, 14.11_
 
-  - [~] 13.3 Implement 3D cube visualization with keyboard/mouse controls
+  - [ ] 13.3 Implement 3D cube visualization with keyboard/mouse controls
     - 3D rendering with distinct face colors and rotation animations
     - Keyboard input for moves, mouse drag for camera
     - _Requirements: 14.6, 14.7, 14.8_
@@ -246,18 +246,18 @@ Platform: Windows, PowerShell, `py` command. Python 3.10+ (user has 3.14).
 ### Phase 4: 6502 CPU Simulator (Future)
 
 - [ ] 14. Implement 6502 CPU simulator
-  - [~] 14.1 Implement CPU core: registers, memory, instruction decoder
+  - [ ] 14.1 Implement CPU core: registers, memory, instruction decoder
     - `CPUState` dataclass, `Memory` class (64KB, ROM regions, memory-mapped I/O)
     - Table-driven opcode decoder with all addressing modes
     - _Requirements: 15.1, 15.2, 15.3, 15.4_
 
-  - [~] 14.2 Implement full instruction set and BCD arithmetic
+  - [ ] 14.2 Implement full instruction set and BCD arithmetic
     - All documented 6502 opcodes with correct flag behavior
     - Decimal mode (BCD) for ADC/SBC, stack wrap-around
     - Property tests for Properties 12 (round-trip), 13 (ROM protection), 14 (BCD), 19 (stack wrap)
     - _Requirements: 15.5, 15.6, 15.8, 15.11_
 
-  - [~] 14.3 Implement assembler, disassembler, and debugger
+  - [ ] 14.3 Implement assembler, disassembler, and debugger
     - Two-pass assembler (label resolution), disassembler, step-through debugger
     - Memory-mapped LCD display (16x2)
     - Standalone visualization with register/memory panels
@@ -268,18 +268,18 @@ Platform: Windows, PowerShell, `py` command. Python 3.10+ (user has 3.14).
 ### Phase 5: Jupyter Trainer Notebooks and Documentation (Future)
 
 - [ ] 15. Create Jupyter trainer notebooks and documentation
-  - [~] 15.1 Create trainer notebooks
+  - [ ] 15.1 Create trainer notebooks
     - Spring pendulum, SIR model, N-body, Riemann sums, Lissajous
     - Each with physics explanations, incremental code cells, interactive widgets, exercises
     - _Requirements: 18.1–18.5_
 
-  - [~] 15.2 Create comprehensive documentation
+  - [ ] 15.2 Create comprehensive documentation
     - Physics explanation documents for each module (equations of motion, numerical methods)
     - API docs from docstrings (mkdocs or sphinx)
     - CONTRIBUTING.md with development setup and PR guidelines
     - _Requirements: 22.1–22.4_
 
-  - [~] 15.3 Create FUTURE.md and Plotly/PyVista backends
+  - [ ] 15.3 Create FUTURE.md and Plotly/PyVista backends
     - FUTURE.md listing planned models (Lorenz, wave equation, quantum, fluid, EM fields)
     - Plotly interactive backend for notebooks
     - PyVista 3D backend for standalone
