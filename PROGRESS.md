@@ -9,8 +9,9 @@ Last updated: July 22, 2026
 | Phase 1 | ✅ COMPLETE | Core engine, spring pendulum, gravity, SIR, visualization, CLI, CI/CD |
 | Phase 2 | ✅ COMPLETE | All remaining physics simulations (12 total) |
 | Phase 3 | ✅ COMPLETE | Rubik's cube → separate repo |
-| Phase 4 | ⏳ NOT STARTED | 6502 CPU simulator → separate repo |
-| Phase 5 | 🔄 PARTIAL | CONTRIBUTING.md + FUTURE.md done, notebooks remaining |
+| Phase 4 | ✅ COMPLETE | 6502 CPU simulator → separate repo |
+| Phase 5 | ✅ COMPLETE | Notebooks, docs, blog posts, CONTRIBUTING, FUTURE |
+| Testing | ✅ COMPLETE | Smoke tests + verify script for all simulations |
 
 ---
 
@@ -18,9 +19,9 @@ Last updated: July 22, 2026
 
 | Repo | URL | Status |
 |------|-----|--------|
-| Physics Modeling | https://github.com/professor314/Physics-Modeling | Active — 12 simulations |
+| Physics Modeling | https://github.com/professor314/Physics-Modeling | Complete — 12 simulations + notebooks + tests |
 | Rubik's Cube | https://github.com/professor314/rubiks-cube | Complete — interactive 3D app |
-| 6502 Simulator | (not yet created) | Phase 4 — not started |
+| 6502 Simulator | https://github.com/professor314/6502-simulator | Complete — full CPU emulator with assembler + debugger |
 
 ---
 
@@ -65,10 +66,23 @@ Separate repo: professor314/6502-simulator. See tasks.md for full breakdown.
 physics-modeling list
 physics-modeling spring-pendulum
 
+# Quick verification (run after any change)
+cd extensions
+py scripts/verify.py
+
+# Full test suite
+cd extensions
+pytest tests/test_viz_smoke.py -v
+
 # Rubik's cube (from rubiks-cube/ directory)
 cd rubiks-cube
 pip install -e .
 rubiks-cube
+
+# 6502 simulator
+cd 6502-simulator
+pip install -e .
+6502-sim run programs/hello.asm
 
 # Install after pulling
 cd extensions

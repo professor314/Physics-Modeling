@@ -98,10 +98,27 @@ Interactive Jupyter notebooks for exploring simulations with parameter sliders:
 ```bash
 pip install -e ".[dev]"
 
-pytest tests/ -v          # Run tests
-mypy physics_modeling/    # Type checking
-ruff check physics_modeling/  # Linting
+# Quick verification (0.5s — checks all sims move, viz imports, CLI dispatch)
+py scripts/verify.py
+
+# Full test suite
+pytest tests/ -v
+
+# Smoke tests only (viz-specific checks)
+pytest tests/test_viz_smoke.py -v
+
+# Type checking and linting
+mypy physics_modeling/
+ruff check physics_modeling/
 ```
+
+### Before pushing changes
+
+Always run `py scripts/verify.py` to catch:
+- Simulations that don't animate (frozen state)
+- Missing `__main__` blocks in viz files
+- CLI commands pointing to wrong function names
+- NaN/Inf values from bad default configs
 
 ## Requirements
 

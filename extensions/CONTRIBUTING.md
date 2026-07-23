@@ -38,5 +38,6 @@ physics-modeling spring-pendulum       # launch one
 1. Fork the repo
 2. Create a feature branch
 3. Write your code + tests
-4. Run `ruff check` and `mypy --strict`
-5. Submit PR with description of what the simulation models
+4. Run `py scripts/verify.py` (must pass)
+5. Run `ruff check` and `mypy --strict`
+6. Submit PR with description of what the simulation models
