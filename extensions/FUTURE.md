@@ -23,7 +23,7 @@ Planned extensions to the physics-modeling package. Each item references which e
 
 | Feature | Description |
 |---------|-------------|
-| Plotly Backend | Interactive 3D in Jupyter without matplotlib | 
+| Plotly Backend | Interactive 3D in Jupyter without matplotlib |
 | PyVista Backend | Hardware-accelerated 3D for standalone |
 | Jupyter Widgets | ipywidgets sliders for all simulations |
 | Adaptive Step Size | Auto-adjust dt based on local error |
@@ -31,6 +31,45 @@ Planned extensions to the physics-modeling package. Each item references which e
 | Performance Profiling | Benchmark each simulation, identify bottlenecks |
 | NumPy Vectorization | Replace inner loops with vectorized operations |
 | Multi-package Split | Separate core/simulations/viz into independent packages |
+
+### Dual-Mode Visualization (Standalone + Jupyter)
+
+The existing `visualization/` module has infrastructure for this (Renderer protocol, environment detection) but it's not wired into the viz files yet.
+
+**Goal:** Every simulation works in BOTH modes:
+- **Standalone**: `physics-modeling spring-pendulum` opens a matplotlib window (current behavior)
+- **Jupyter**: `from physics_modeling.oscillators import SpringPendulum; sim.show()` renders inline with Plotly/ipywidgets
+
+**Detailed tasks:**
+
+1. **Wire viz files through the Renderer protocol**
+   - Each `_viz.py` file currently uses matplotlib directly
+   - Refactor to accept a `renderer` parameter, defaulting to `MatplotlibRenderer`
+   - When in a notebook, auto-select `PlotlyRenderer` instead
+
+2. **Implement PlotlyRenderer** (`visualization/plotly_backend.py`)
+   - Implement the `Renderer` protocol using Plotly for 2D and 3D
+   - Support `add_slider()` via Plotly FigureWidget or ipywidgets
+   - Renders inline in Jupyter cells
+
+3. **Implement environment auto-switching**
+   - `detect_environment()` already exists in `visualization/environment.py`
+   - Add `get_default_renderer()` that returns Plotly in notebooks, Matplotlib in standalone
+   - Each viz file calls this if no explicit renderer is passed
+
+4. **Add `.show()` convenience method to Simulation classes**
+   - `sim.show()` picks the right renderer and launches the visualization
+   - Works in both standalone (opens window) and notebook (renders inline)
+   - No need to import viz files separately
+
+5. **ipywidgets integration for notebooks** (`visualization/widgets.py`)
+   - Wrapper providing sliders/buttons via ipywidgets
+   - Maps to the same `add_slider()` interface used by matplotlib widgets
+   - Enables real-time parameter changes inside Jupyter cells
+
+**Dependencies:** `plotly`, `ipywidgets` (already in `[project.optional-dependencies].notebook`)
+
+**Current state:** `visualization/renderer.py` (protocol), `environment.py` (detection), and `matplotlib_backend.py` (2D/3D renderers with slider support) are already built. This work wires them into the existing viz files and adds the Plotly alternative.
 
 ## Documentation
 
