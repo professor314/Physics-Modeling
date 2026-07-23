@@ -2,11 +2,43 @@
 
 This is original coursework from the **Modeling Motion** program at The Evergreen State College (2004). These are Python simulations I wrote modeling physics phenomena — springs, gravity, epidemics, numerical integration, 3D visualization — using the VPython library. I was learning physics and programming simultaneously, figuring out how to translate equations of motion into running code. Everything here is from that year of exploration.
 
+The `extensions/` directory contains a modern rewrite: the **physics-modeling** package with 12 interactive simulations, a CLI runner, and property-based tests. The `original/` directory preserves the 2004 code exactly as written.
+
 ## The Rubik's Cube
 
-The program I'm proudest of from this course is the Rubik's cube. It wasn't a class assignment — I built it entirely from scratch as an independent project. It renders a full 3D Rubik's cube using VPython and implements face rotations with correct piece tracking. The `original/rubiks-cube/` directory contains every evolutionary stage of the project, from early experiments (`get this box to grow!.py`) to the final working versions (`best_cube.py`, `cube_class.py`). Each file is a snapshot of me figuring out 3D transformations one breakthrough at a time.
+The program I'm proudest of from this course is the Rubik's cube. It wasn't a class assignment — I built it entirely from scratch as an independent project. It renders a full 3D Rubik's cube and implements face rotations with correct piece tracking.
 
-## Simulations
+The Rubik's cube has been extracted into its own repository: **[rubiks-cube](https://github.com/seanpoyner/rubiks-cube)**
+
+The `original/rubiks-cube/` directory still contains every evolutionary stage of the original project, from early experiments (`get this box to grow!.py`) to the final working versions (`best_cube.py`, `cube_class.py`).
+
+## Modern Physics Simulations (extensions/)
+
+The `extensions/` directory contains the `physics-modeling` Python package — a full rewrite with 12 simulations available via CLI:
+
+```bash
+cd extensions && pip install -e .
+physics-modeling list
+```
+
+| Simulation | CLI Command | Description |
+|---|---|---|
+| Spring Pendulum | `spring-pendulum` | 3D spring pendulum with interactive sliders |
+| Double Pendulum | `double-pendulum` | 2D double pendulum with chaotic motion and trail |
+| Lissajous Figures | `lissajous` | 3D Lissajous figure visualization |
+| Bouncing/Gravity | `gravity` | 3D bouncing objects under gravity (fountain mode) |
+| N-Body | `nbody` | 3D N-body gravitational simulation (binary star + particles) |
+| Elastic Collisions | `collisions` | Elastic collision simulation |
+| Hard-Sphere Gas | `gas` | Ideal gas hard-sphere simulation |
+| SIR Epidemic | `sir` | SIR epidemic model with parameter sliders |
+| SEIR Epidemic | `seir` | SEIR epidemic model with parameter sliders |
+| Logistic Equation | `logistic` | Logistic growth equation visualization |
+| Riemann Sums | `riemann` | Riemann sum visualization with interactive controls |
+| Bouncing (alias) | `bouncing` | Alias for gravity simulation |
+
+See the [extensions README](extensions/README.md) for full installation and usage details.
+
+## Original Simulations (2004)
 
 | Simulation | Files | Description |
 |---|---|---|
@@ -17,21 +49,19 @@ The program I'm proudest of from this course is the Rubik's cube. It wasn't a cl
 | Logistic Equation | `original/assignments/logistic.py` | Population growth with carrying capacity |
 | Lissajous Figures | `original/assignments/lissajous.py`, `lissa2.py` | Parametric curves rendered in 3D |
 | Riemann Sums | `original/assignments/riemann.py` | Numerical integration visualization |
-| Rubik's Cube | `original/rubiks-cube/` | 3D visualization and rotation of a Rubik's cube (independent project) |
 | Assembly Simulator | `original/extras/assembler.py`, `processor.py`, `simulator.py` | Custom instruction set simulator with its own machine language |
 
 ## How to Run
 
-### Prerequisites
+### Modern Package (recommended)
 
-- Python 3.7+
-- vpython and numpy:
-
+```bash
+cd extensions
+pip install -e .
+physics-modeling spring-pendulum
 ```
-pip install vpython numpy
-```
 
-### Running Simulations
+### Original Code (requires VPython compatibility shim)
 
 Set `PYTHONPATH` to include the compatibility shim so legacy `from visual import *` imports resolve correctly:
 
@@ -60,21 +90,23 @@ python original/assignments/logistic.py
 
 ```
 modeling-motion/
-├── original/                    # All original code from 2004
+├── extensions/                  # Modern physics-modeling package (12 simulations)
+│   ├── physics_modeling/        # Source code (core, oscillators, gravity, etc.)
+│   ├── tests/                   # Property-based and unit tests
+│   ├── notebooks/               # Jupyter training notebooks
+│   └── pyproject.toml           # Package configuration
+├── original/                    # All original code from 2004 (preserved)
 │   ├── rubiks-cube/             # Rubik's cube project (all versions)
 │   ├── assignments/             # Course assignments (springs, gravity, etc.)
 │   └── extras/                  # Supplementary programs (crypto, assembler, calculus)
 ├── compat/                      # Compatibility shim for legacy VPython imports
 │   └── visual/                  # Maps `from visual import *` to modern vpython
-├── references/                  # Third-party material (NOT my original work)
-│   └── glowscript-examples/    # GlowScript/VPython example programs
+├── rubiks-cube/                 # Standalone Rubik's cube package (separate repo)
 ├── docs/
 │   ├── journal/                 # Weekly reflections and evaluations
-│   │   ├── weeks/               # Journal Week 1–10
-│   │   └── evaluations/         # Quarterly self-assessments
+│   ├── blog/                    # Technical blog posts
 │   └── FUTURE_IDEAS.md          # Planned extensions and improvements
-├── extensions/                  # Reserved for future new work (empty for now)
-├── .gitignore
+├── .github/workflows/ci.yml     # CI pipeline
 └── README.md                    # This file
 ```
 
@@ -92,7 +124,7 @@ The `docs/journal/` directory contains weekly reflections and evaluation workshe
 
 ## Future Plans
 
-I have ideas for extending this work — adding RK4 integration, numpy optimizations, interactive parameter controls, and new simulation models. See [docs/FUTURE_IDEAS.md](docs/FUTURE_IDEAS.md) for the full list. Any new code will live in the `extensions/` directory, keeping the original coursework untouched.
+I have ideas for extending this work — adding more simulations, numpy optimizations, interactive parameter controls, and new models. See [docs/FUTURE_IDEAS.md](docs/FUTURE_IDEAS.md) for the full list. New code lives in the `extensions/` directory, keeping the original coursework untouched.
 
 ## Credits
 

@@ -430,6 +430,47 @@ Platform: Windows, PowerShell, `py` command. Python 3.10+ (user has 3.14).
 
 ---
 
+### Phase 5b: README Audit and Blog Posts
+
+- [ ] 16.1 Audit and update Physics-Modeling top-level README.md
+  - Ensure it accurately reflects current state (12 simulations, no rubiks/6502)
+  - Update project structure section
+  - Add link to extensions/FUTURE.md
+  - Make sure install + run instructions are correct for Python 3.14
+
+- [ ] 16.2 Audit and update extensions/README.md
+  - Full API overview table (all modules, classes, key functions)
+  - Installation instructions (pip install -e .)
+  - Quick-start code examples for each simulation
+  - Link to CONTRIBUTING.md and FUTURE.md
+
+- [ ] 16.3 Audit rubiks-cube/README.md
+  - Verify controls section is accurate
+  - Add screenshot placeholder or ASCII art
+  - Verify install instructions work
+
+- [ ] 16.4 Create blog post: "Modernizing a 2004 Physics Codebase"
+  - `docs/blog/01-modernizing-legacy-code.md`
+  - Story: found old college code, organized it, made it run on Python 3.14
+  - Topics: VPython → matplotlib migration, compatibility shim approach, preserving original code
+  - ~1000 words
+
+- [ ] 16.5 Create blog post: "Building a Physics Simulation Engine in Python"
+  - `docs/blog/02-physics-simulation-engine.md`
+  - Technical: Euler vs RK4 vs Verlet, base Simulation class pattern, separation of physics from viz
+  - Code examples showing how to create a new simulation
+  - ~1500 words
+
+- [ ] 16.6 Create blog post: "Interactive Rubik's Cube with Matplotlib"
+  - `docs/blog/03-rubiks-cube-matplotlib.md`
+  - How to render 3D objects with Poly3DCollection, facelet coordinate math, keyboard events
+  - The tricky parts: move cycle definitions, validation logic
+  - ~1000 words
+
+- [ ] 16.7 Push all changes to GitHub repos
+
+---
+
 ## Notes
 
 - Tasks marked with `*` are optional property-based test tasks and can be skipped for faster MVP
