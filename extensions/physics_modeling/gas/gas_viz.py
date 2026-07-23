@@ -23,8 +23,8 @@ __all__ = ["run_gas_3d"]
 
 def run_gas_3d(
     config: GasConfig | None = None,
-    n_steps: int = 2000,
-    interval: int = 30,
+    n_steps: int = 5,
+    interval: int = 50,
 ) -> None:
     """Run an animated 3D scatter visualization of the hard sphere gas.
 
@@ -60,7 +60,7 @@ def run_gas_3d(
     from physics_modeling.gas.hard_sphere import GasConfig, HardSphereGas
 
     if config is None:
-        config = GasConfig()
+        config = GasConfig(n_particles=50, dt=0.005, particle_radius=0.2)
 
     gas = HardSphereGas(config)
 
@@ -156,4 +156,5 @@ def run_gas_3d(
     )
 
     plt.tight_layout()
+    fig._anim = _anim  # prevent garbage collection  # type: ignore[attr-defined]
     plt.show()
