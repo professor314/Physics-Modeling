@@ -192,6 +192,7 @@ def run_nbody_3d(
     )
 
     plt.tight_layout()
+    fig._anim = _anim  # type: ignore[attr-defined]  # prevent GC
     plt.show()
 
 

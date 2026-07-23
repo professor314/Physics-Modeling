@@ -203,7 +203,7 @@ def run_spring_pendulum_3d(config: SpringPendulumConfig | None = None) -> None:
         blit=False,
         cache_frame_data=False,
     )
-
+    fig._ani = _ani  # type: ignore[attr-defined]  # prevent GC
     plt.show()
 
 

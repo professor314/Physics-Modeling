@@ -182,6 +182,7 @@ def run_bouncing_3d(config: GravityConfig | None = None) -> None:
     )
 
     plt.tight_layout()
+    fig._anim = _anim  # type: ignore[attr-defined]  # prevent GC
     plt.show()
 
 

@@ -135,6 +135,7 @@ def run_collisions_3d(
     _anim = FuncAnimation(  # noqa: F841
         fig, update, frames=n_frames, interval=interval, blit=False
     )
+    fig._anim = _anim  # type: ignore[attr-defined]  # prevent GC
     plt.show()
 
 
