@@ -159,3 +159,7 @@ def _extract_positions(
     for i in range(n_objects):
         positions[i] = state[6 * i : 6 * i + 3]
     return positions
+
+
+if __name__ == "__main__":
+    run_collisions_3d()

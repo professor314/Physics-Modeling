@@ -158,3 +158,7 @@ def run_gas_3d(
     plt.tight_layout()
     fig._anim = _anim  # prevent garbage collection  # type: ignore[attr-defined]
     plt.show()
+
+
+if __name__ == "__main__":
+    run_gas_3d()
