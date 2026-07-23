@@ -60,7 +60,16 @@ def run_gas_3d(
     from physics_modeling.gas.hard_sphere import GasConfig, HardSphereGas
 
     if config is None:
-        config = GasConfig(n_particles=50, dt=0.005, particle_radius=0.2)
+        # Normalized units: mass=1, temperature scaled so particles move visibly
+        # v_rms ≈ 1 unit/step, with dt=0.1 and 3 steps/frame = ~0.3 units/frame
+        config = GasConfig(
+            n_particles=50,
+            dt=0.1,
+            particle_radius=0.3,
+            particle_mass=1.0,
+            temperature=3e22,  # gives v_rms ≈ 1 in normalized units
+            container_size=(10.0, 10.0, 10.0),
+        )
 
     gas = HardSphereGas(config)
 
