@@ -222,68 +222,211 @@ Platform: Windows, PowerShell, `py` command. Python 3.10+ (user has 3.14).
 
 ---
 
-### Phase 3: Rubik's Cube Application (Future)
+### Phase 3: Rubik's Cube Application (SEPARATE REPO: professor314/rubiks-cube)
 
-- [ ] 13. Implement Rubik's Cube full application
-  - [x] 13.1 Implement cube state representation and move system
-    - `CubeState` with (6,3,3) facelet array, `Move` enum, `apply_move()`, `apply_sequence()`
-    - Validation (solvability check), `inverse_move()`, `inverse_sequence()`
-    - _Requirements: 14.1, 14.2, 14.3, 14.4_
+> This is a standalone project, NOT part of the physics-modeling package.
+> Will be created as a new GitHub repo. Has its own pyproject.toml, README, and CLI.
 
-  - [ ] 13.2 Implement solver, scrambler, and timer
-    - Kociemba solver integration, scramble generator (20-25 moves, no same-face consecutive)
-    - Timer measuring from first move to solved-state detection
-    - Property tests for Properties 9 (round-trip), 10 (state validity), 11 (scramble constraints)
-    - _Requirements: 14.5, 14.9, 14.10, 14.11_
+- [x] 13.1 Implement cube state representation and move system
+  - CubeState with (6,3,3) facelet array, Move enum, apply/inverse, validation
+  - _DONE — code exists at extensions/physics_modeling/rubiks_cube/ and will be moved_
 
-  - [ ] 13.3 Implement 3D cube visualization with keyboard/mouse controls
-    - 3D rendering with distinct face colors and rotation animations
-    - Keyboard input for moves, mouse drag for camera
-    - _Requirements: 14.6, 14.7, 14.8_
+- [x] 13.2 Create scrambler.py
+- [x] 13.3 Create timer.py
+- [x] 13.4 Create solver.py
+- [x] 13.5 Create rubiks-cube project scaffolding
+- [x] 13.6 Create cube_viz.py — 3D rendering function
+- [x] 13.7 Create cube_viz.py — keyboard controls and main loop
+- [x] 13.8 Initialize git repo and push to GitHub
 
 ---
 
-### Phase 4: 6502 CPU Simulator (Future)
+### Phase 4: 6502 CPU Simulator (SEPARATE REPO: professor314/6502-simulator)
 
-- [ ] 14. Implement 6502 CPU simulator
-  - [ ] 14.1 Implement CPU core: registers, memory, instruction decoder
-    - `CPUState` dataclass, `Memory` class (64KB, ROM regions, memory-mapped I/O)
-    - Table-driven opcode decoder with all addressing modes
-    - _Requirements: 15.1, 15.2, 15.3, 15.4_
+> This is a standalone project, NOT part of the physics-modeling package.
+> Will be created as a new GitHub repo. Has its own pyproject.toml, README, and CLI.
 
-  - [ ] 14.2 Implement full instruction set and BCD arithmetic
-    - All documented 6502 opcodes with correct flag behavior
-    - Decimal mode (BCD) for ADC/SBC, stack wrap-around
-    - Property tests for Properties 12 (round-trip), 13 (ROM protection), 14 (BCD), 19 (stack wrap)
-    - _Requirements: 15.5, 15.6, 15.8, 15.11_
+- [ ] 14.1 Create 6502-simulator project scaffolding
+  - Create new directory structure for standalone repo:
+    - `cpu_6502/` package
+    - `pyproject.toml` (name: 6502-simulator, deps: numpy, matplotlib)
+    - `README.md` (project description, 6502 overview, usage examples)
+    - `.gitignore`
+    - `tests/` directory
+  - Move existing cpu_6502/ code from extensions/physics_modeling/ (if any)
+  - Remove cpu_6502/ from extensions/physics_modeling/
+  - Remove 6502 from physics-modeling CLI
 
-  - [ ] 14.3 Implement assembler, disassembler, and debugger
-    - Two-pass assembler (label resolution), disassembler, step-through debugger
-    - Memory-mapped LCD display (16x2)
-    - Standalone visualization with register/memory panels
-    - _Requirements: 15.7, 15.9, 15.10_
+- [ ] 14.2 Create cpu_6502/cpu.py — CPUState dataclass
+  - Registers: A, X, Y, SP, PC + status flags (N, V, B, D, I, Z, C)
+  - `status` property (pack/unpack flags to byte)
+  - ~60 lines.
+  - _Requirements: 15.2_
+
+- [ ] 14.2 Create cpu_6502/memory.py — Memory class
+  - 64KB bytearray, read(addr), write(addr, val)
+  - ROM regions (write ignored), memory-mapped I/O handler registration
+  - load_rom(data, start_address)
+  - ~80 lines.
+  - _Requirements: 15.3, 15.4_
+
+- [ ] 14.3 Create cpu_6502/opcodes.py — opcode table
+  - [ ] 14.3a Define AddressingMode enum (IMMEDIATE, ZERO_PAGE, ZERO_PAGE_X, ZERO_PAGE_Y, ABSOLUTE, ABSOLUTE_X, ABSOLUTE_Y, INDIRECT, INDEXED_INDIRECT, INDIRECT_INDEXED, IMPLIED, ACCUMULATOR, RELATIVE)
+  - [ ] 14.3b Define Instruction dataclass: opcode(int), mnemonic(str), mode(AddressingMode), cycles(int), operand_bytes(int)
+  - [ ] 14.3c Create OPCODE_TABLE dict for load/store/transfer opcodes (LDA, LDX, LDY, STA, STX, STY, TAX, TAY, TXA, TYA, TSX, TXS) — ~30 entries
+  - [ ] 14.3d Add arithmetic/logic opcodes (ADC, SBC, AND, ORA, EOR, CMP, CPX, CPY, INC, DEC, INX, INY, DEX, DEY) — ~50 entries
+  - [ ] 14.3e Add shift/rotate opcodes (ASL, LSR, ROL, ROR) — ~20 entries
+  - [ ] 14.3f Add branch/jump/stack opcodes (BCC, BCS, BEQ, BNE, BMI, BPL, BVC, BVS, JMP, JSR, RTS, RTI, BRK, NOP, PHA, PLA, PHP, PLP, SEC, CLC, SEI, CLI, SED, CLD, CLV) — ~50 entries
+  - [ ] 14.3g Add decode(memory, pc) function that reads opcode byte + operand bytes and returns Instruction
+  - Total: ~200 lines of data + ~30 lines of decode logic. Reference: http://www.6502.org/tutorials/6502opcodes.html
+  - _Requirements: 15.1_
+
+- [ ] 14.4 Create cpu_6502/executor.py — instruction execution (load/store/transfer)
+  - LDA, LDX, LDY, STA, STX, STY, TAX, TAY, TXA, TYA, TSX, TXS
+  - Flag updates for N and Z
+  - ~80 lines.
+  - _Requirements: 15.1_
+
+- [ ] 14.5 Create cpu_6502/executor.py — arithmetic and logic
+  - [ ] 14.5a Implement ADC (add with carry) — binary mode: A = A + operand + C, set N/Z/C/V flags
+  - [ ] 14.5b Implement ADC BCD mode — when D flag set: decimal addition, carry on >99
+  - [ ] 14.5c Implement SBC (subtract) — binary mode: A = A - operand - !C, set N/Z/C/V flags
+  - [ ] 14.5d Implement SBC BCD mode — decimal subtraction with borrow
+  - [ ] 14.5e Implement AND, ORA, EOR — bitwise ops on A, set N/Z
+  - [ ] 14.5f Implement CMP, CPX, CPY — compare by subtracting, set N/Z/C but don't store result
+  - [ ] 14.5g Implement INC, DEC (memory), INX, INY, DEX, DEY (register) — set N/Z
+  - [ ] 14.5h Implement ASL, LSR, ROL, ROR — shift/rotate A or memory, set N/Z/C
+  - BCD reference: https://www.nesdev.org/wiki/Decimal_mode
+  - ~150 lines total.
+  - _Requirements: 15.1, 15.11_
+
+- [ ] 14.6 Create cpu_6502/executor.py — branches, jumps, stack
+  - BCC, BCS, BEQ, BNE, BMI, BPL, BVC, BVS (relative addressing)
+  - JMP, JSR, RTS, RTI, BRK
+  - PHA, PLA, PHP, PLP
+  - Stack pointer wrap-around ($0100-$01FF page)
+  - ~120 lines.
+  - _Requirements: 15.5, 15.6_
+
+- [ ] 14.7 Create cpu_6502/cpu.py — CPU6502 class (main execution loop)
+  - fetch(), decode(), execute() cycle
+  - step() → execute one instruction, return cycles
+  - run(n_instructions) and run_until(address)
+  - Wire together memory + opcodes + executor
+  - ~100 lines.
+  - _Requirements: 15.1, 15.2_
+
+- [ ] 14.8 Create cpu_6502/assembler.py — two-pass assembler
+  - [ ] 14.8a Define addressing mode syntax patterns and regex matchers:
+    - `#$nn` → IMMEDIATE, `$nn` → ZERO_PAGE, `$nn,X` → ZERO_PAGE_X, `$nn,Y` → ZERO_PAGE_Y
+    - `$nnnn` → ABSOLUTE, `$nnnn,X` → ABSOLUTE_X, `$nnnn,Y` → ABSOLUTE_Y
+    - `($nnnn)` → INDIRECT, `($nn,X)` → INDEXED_INDIRECT, `($nn),Y` → INDIRECT_INDEXED
+    - `A` → ACCUMULATOR, (no operand) → IMPLIED, `label` → RELATIVE/ABSOLUTE
+  - [ ] 14.8b Implement Pass 1: scan for labels (lines with `label:` prefix), record PC address in symbol table
+  - [ ] 14.8c Implement Pass 2: parse mnemonic + operand, detect addressing mode, look up opcode, emit bytes
+  - [ ] 14.8d Handle directives: `.byte $xx`, `.word $xxxx`, `.org $xxxx`
+  - [ ] 14.8e Raise AssemblyError with line number on any failure
+  - ~200 lines total.
+  - _Requirements: 15.7_
+
+- [ ] 14.9 Create cpu_6502/disassembler.py
+  - Convert bytes back to assembly text with addresses
+  - ~80 lines.
+  - _Requirements: 15.7_
+
+- [ ] 14.10 Create cpu_6502/lcd.py — memory-mapped LCD display
+  - LCDDisplay class: 16x2 character grid mapped to address range
+  - write(address, value) updates cursor/display buffer
+  - get_display() → list of row strings
+  - ~60 lines.
+  - _Requirements: 15.4_
+
+- [ ] 14.11 Create cpu_6502/debugger.py — step-through debugger
+  - Debugger class: step(), get_registers(), get_disassembly(), get_memory_view()
+  - set_breakpoint(address), run_until_break()
+  - ~80 lines.
+  - _Requirements: 15.9_
+
+- [ ] 14.12 Create cpu_6502/viz.py — standalone TUI/matplotlib panel
+  - Show registers, current instruction, memory hex dump, LCD display
+  - Keyboard: 's'=step, 'r'=run, 'b'=breakpoint, 'q'=quit
+  - ~150 lines.
+  - _Requirements: 15.10_
+
+- [ ] 14.13 Update cpu_6502/__init__.py and add CLI entry point
+  - Export all public classes
+  - Add `6502` subcommand to cli/main.py
+  - ~20 lines.
+
+- [ ] 14.15 Initialize git repo and push to GitHub
+  - `git init` in the 6502-simulator directory
+  - Create repo on GitHub: professor314/6502-simulator
+  - Push initial commit
+
+- [ ] 14.16 Verify — load and run a simple 6502 program
+  - Write a test program that counts from 0 to 10 and writes to LCD
+  - Assemble, load into memory, run, verify LCD output
+  - Confirms full pipeline works end-to-end.
 
 ---
 
-### Phase 5: Jupyter Trainer Notebooks and Documentation (Future)
+### Phase 5: Jupyter Trainer Notebooks and Documentation
 
-- [ ] 15. Create Jupyter trainer notebooks and documentation
-  - [ ] 15.1 Create trainer notebooks
-    - Spring pendulum, SIR model, N-body, Riemann sums, Lissajous
-    - Each with physics explanations, incremental code cells, interactive widgets, exercises
-    - _Requirements: 18.1–18.5_
+- [ ] 15.0 Clean up physics-modeling repo
+  - Remove `extensions/physics_modeling/rubiks_cube/` (moved to separate repo)
+  - Remove `extensions/physics_modeling/cpu_6502/` (moved to separate repo)
+  - Remove rubiks-cube and 6502 entries from cli/main.py
+  - Remove rubiks-cube and 6502 references from pyproject.toml optional deps
+  - Commit and push to Physics-Modeling repo
 
-  - [ ] 15.2 Create comprehensive documentation
-    - Physics explanation documents for each module (equations of motion, numerical methods)
-    - API docs from docstrings (mkdocs or sphinx)
-    - CONTRIBUTING.md with development setup and PR guidelines
-    - _Requirements: 22.1–22.4_
+- [ ] 15.1 Create notebooks/spring_pendulum_trainer.ipynb
+  - Physics explanation (SHM, Hooke's law, Euler's method)
+  - Build simulation step by step
+  - Interactive widgets for k, damping
+  - Exercise: add air resistance
+  - _Requirements: 18.1–18.5_
 
-  - [ ] 15.3 Create FUTURE.md and Plotly/PyVista backends
-    - FUTURE.md listing planned models (Lorenz, wave equation, quantum, fluid, EM fields)
-    - Plotly interactive backend for notebooks
-    - PyVista 3D backend for standalone
-    - _Requirements: 16.3, 16.4, 23.7_
+- [ ] 15.2 Create notebooks/sir_model_trainer.ipynb
+  - SIR math derivation, R₀ explanation
+  - Build SIR simulation incrementally
+  - Widget sliders for β, γ
+  - Exercise: implement SEIR extension
+  - _Requirements: 18.1–18.5_
+
+- [ ] 15.3 Create notebooks/nbody_trainer.ipynb
+  - Gravitational force derivation, Verlet integrator explanation
+  - Build binary star system step by step
+  - Exercise: add a third body
+  - _Requirements: 18.1–18.5_
+
+- [ ] 15.4 Create notebooks/riemann_sums_trainer.ipynb
+  - Integration fundamentals, Riemann sum types
+  - Visualize convergence as n increases
+  - Exercise: implement trapezoidal rule
+  - _Requirements: 18.1–18.5_
+
+- [ ] 15.5 Create notebooks/lissajous_trainer.ipynb
+  - Parametric curves, frequency ratios, closure conditions
+  - Interactive frequency/phase widgets
+  - Exercise: predict closed vs open curves
+  - _Requirements: 18.1–18.5_
+
+- [ ] 15.6 Create docs/README.md (extensions)
+  - Full installation guide, API overview, module listing
+  - _Requirements: 22.1_
+
+- [ ] 15.7 Create docs/physics/ explanation documents
+  - One markdown doc per simulation module explaining the math
+  - _Requirements: 22.2_
+
+- [ ] 15.8 Create CONTRIBUTING.md
+  - Dev setup, coding standards, PR guidelines, test instructions
+  - _Requirements: 22.4_
+
+- [ ] 15.9 Create FUTURE.md
+  - Planned models: Lorenz attractor, wave equation, quantum, fluid, EM fields
+  - Organized by difficulty and dependency
+  - _Requirements: 23.7_
 
 ---
 
@@ -303,23 +446,19 @@ Platform: Windows, PowerShell, `py` command. Python 3.10+ (user has 3.14).
 ```json
 {
   "waves": [
-    { "id": 0, "tasks": ["1.1"] },
-    { "id": 1, "tasks": ["1.2", "1.3"] },
-    { "id": 2, "tasks": ["2.1"] },
-    { "id": 3, "tasks": ["2.2", "2.3"] },
-    { "id": 4, "tasks": ["2.4", "2.5", "2.6"] },
-    { "id": 5, "tasks": ["4.1", "5.1", "6.1"] },
-    { "id": 6, "tasks": ["4.2", "5.2", "6.2", "6.3"] },
-    { "id": 7, "tasks": ["8.1"] },
-    { "id": 8, "tasks": ["8.2", "8.3"] },
-    { "id": 9, "tasks": ["9.1"] },
-    { "id": 10, "tasks": ["10.1"] },
-    { "id": 11, "tasks": ["12.1", "12.2", "12.3", "12.4", "12.5"] },
-    { "id": 12, "tasks": ["13.1"] },
-    { "id": 13, "tasks": ["13.2", "13.3"] },
-    { "id": 14, "tasks": ["14.1"] },
-    { "id": 15, "tasks": ["14.2", "14.3"] },
-    { "id": 16, "tasks": ["15.1", "15.2", "15.3"] }
+    { "id": 12, "tasks": ["13.2", "13.3", "13.4"] },
+    { "id": 13, "tasks": ["13.5"] },
+    { "id": 14, "tasks": ["13.6"] },
+    { "id": 15, "tasks": ["13.7"] },
+    { "id": 16, "tasks": ["13.8"] },
+    { "id": 17, "tasks": ["14.1", "14.2", "14.3"] },
+    { "id": 18, "tasks": ["14.4", "14.5", "14.6"] },
+    { "id": 19, "tasks": ["14.7"] },
+    { "id": 20, "tasks": ["14.8", "14.9", "14.10", "14.11"] },
+    { "id": 21, "tasks": ["14.12", "14.13"] },
+    { "id": 22, "tasks": ["14.14"] },
+    { "id": 23, "tasks": ["15.1", "15.2", "15.3", "15.4", "15.5"] },
+    { "id": 24, "tasks": ["15.6", "15.7", "15.8", "15.9"] }
   ]
 }
 ```

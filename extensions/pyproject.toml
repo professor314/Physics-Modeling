@@ -34,9 +34,6 @@ notebook = [
 3d = [
     "pyvista",
 ]
-rubiks = [
-    "kociemba",
-]
 
 [project.scripts]
 physics-modeling = "physics_modeling.cli.main:main"
