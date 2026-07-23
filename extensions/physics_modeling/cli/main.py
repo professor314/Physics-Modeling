@@ -118,16 +118,16 @@ def _run_riemann() -> None:
 
 def _run_collisions() -> None:
     """Launch the elastic collisions visualization."""
-    from physics_modeling.collisions.collisions_viz import run_collisions_2d
+    from physics_modeling.collisions.collisions_viz import run_collisions_3d
 
-    run_collisions_2d()
+    run_collisions_3d()
 
 
 def _run_gas() -> None:
     """Launch the ideal gas simulation visualization."""
-    from physics_modeling.gas.gas_viz import run_gas_2d
+    from physics_modeling.gas.gas_viz import run_gas_3d
 
-    run_gas_2d()
+    run_gas_3d()
 
 
 def _list_simulations() -> None:
