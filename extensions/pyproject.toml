@@ -37,6 +37,7 @@ notebook = [
 
 [project.scripts]
 physics-modeling = "physics_modeling.cli.main:main"
+physics-launcher = "physics_modeling.launcher:main"
 
 [tool.setuptools.packages.find]
 where = ["."]

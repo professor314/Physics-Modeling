@@ -27,7 +27,7 @@ from matplotlib.axes import Axes
 from matplotlib.collections import PatchCollection
 from matplotlib.figure import Figure
 from matplotlib.patches import Rectangle
-from matplotlib.widgets import Slider
+from matplotlib.widgets import RadioButtons, Slider
 
 from physics_modeling.calculus.riemann import riemann_sum
 
@@ -84,9 +84,9 @@ def run_riemann_2d(
     x_curve = np.linspace(a, b, 1000)
     y_curve = np.array([f(x) for x in x_curve], dtype=np.float64)
 
-    # Set up figure with room for slider
+    # Set up figure with room for slider and radio buttons
     fig: Figure = plt.figure(figsize=(10, 7))
-    ax: Axes = fig.add_axes([0.1, 0.22, 0.8, 0.68])
+    ax: Axes = fig.add_axes([0.1, 0.25, 0.75, 0.65])
 
     ax.set_title(f"Riemann Sum ({method})")
     ax.set_xlabel("x")
@@ -173,13 +173,23 @@ def run_riemann_2d(
         valfmt="%d",
     )
 
-    def _on_slider_changed(val: float) -> None:
-        """Recompute Riemann sum and redraw rectangles when n changes."""
-        n = int(slider_n.val)
-        new_result = riemann_sum(f, a, b, n, method)  # type: ignore[arg-type]
+    # Radio buttons for method selection
+    ax_radio = fig.add_axes([0.02, 0.02, 0.12, 0.15])
+    methods = ["left", "right", "midpoint", "trapezoid"]
+    radio = RadioButtons(ax_radio, methods, active=methods.index(method))
 
-        # Remove old collection and create new one
-        ax.collections.clear()
+    # Mutable method tracker
+    current_method = [method]
+
+    def _redraw() -> None:
+        """Recompute Riemann sum and redraw rectangles."""
+        n = int(slider_n.val)
+        new_result = riemann_sum(f, a, b, n, current_method[0])  # type: ignore[arg-type]
+
+        # Remove old collections (compatible with all matplotlib versions)
+        while ax.collections:
+            ax.collections[0].remove()
+
         new_patches = _make_patches(new_result.rectangles)
         new_colors = [
             (0.3, 0.6, 0.9, 0.4) if row[2] >= 0 else (0.9, 0.3, 0.3, 0.4)
@@ -193,16 +203,27 @@ def run_riemann_2d(
         )
         ax.add_collection(new_collection)
 
-        # Update info text
+        # Update info text and title
         info_text.set_text(
             f"Sum = {new_result.sum_value:.6f}\n"
             f"Reference = {new_result.reference_integral:.6f}\n"
             f"Error = {new_result.relative_error:.2e}"
         )
+        ax.set_title(f"Riemann Sum ({current_method[0]})")
 
         fig.canvas.draw_idle()
 
+    def _on_slider_changed(val: float) -> None:
+        """Recompute Riemann sum and redraw rectangles when n changes."""
+        _redraw()
+
+    def _on_method_changed(label: str) -> None:
+        """Update method and redraw when radio button changes."""
+        current_method[0] = label
+        _redraw()
+
     slider_n.on_changed(_on_slider_changed)
+    radio.on_clicked(_on_method_changed)
 
     plt.show()
 

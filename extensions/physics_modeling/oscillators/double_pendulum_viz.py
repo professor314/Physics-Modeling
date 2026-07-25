@@ -82,14 +82,18 @@ def run_double_pendulum_2d(config: DoublePendulumConfig | None = None) -> None:
     ax.add_collection(trail_collection)
 
     # --- Make room for sliders ---
-    fig.subplots_adjust(bottom=0.22)
+    fig.subplots_adjust(bottom=0.30)
 
-    ax_l1 = fig.add_axes([0.2, 0.12, 0.6, 0.03])
-    ax_l2 = fig.add_axes([0.2, 0.07, 0.6, 0.03])
-    ax_grav = fig.add_axes([0.2, 0.02, 0.6, 0.03])
+    ax_l1 = fig.add_axes([0.2, 0.20, 0.6, 0.03])
+    ax_l2 = fig.add_axes([0.2, 0.15, 0.6, 0.03])
+    ax_m1 = fig.add_axes([0.2, 0.10, 0.6, 0.03])
+    ax_m2 = fig.add_axes([0.2, 0.05, 0.6, 0.03])
+    ax_grav = fig.add_axes([0.2, 0.00, 0.6, 0.03])
 
     slider_l1 = Slider(ax_l1, "L1 (m)", 0.2, 3.0, valinit=config.L1)
     slider_l2 = Slider(ax_l2, "L2 (m)", 0.2, 3.0, valinit=config.L2)
+    slider_m1 = Slider(ax_m1, "M1 (kg)", 0.1, 10.0, valinit=config.m1)
+    slider_m2 = Slider(ax_m2, "M2 (kg)", 0.1, 10.0, valinit=config.m2)
     slider_grav = Slider(ax_grav, "Gravity", 1.0, 20.0, valinit=config.g)
 
     def _on_slider_change(_val: float) -> None:
@@ -98,8 +102,8 @@ def run_double_pendulum_2d(config: DoublePendulumConfig | None = None) -> None:
         new_config = DoublePendulumConfig(
             L1=slider_l1.val,
             L2=slider_l2.val,
-            m1=config.m1,
-            m2=config.m2,
+            m1=slider_m1.val,
+            m2=slider_m2.val,
             g=slider_grav.val,
             theta1_0=config.theta1_0,
             theta2_0=config.theta2_0,
@@ -120,6 +124,8 @@ def run_double_pendulum_2d(config: DoublePendulumConfig | None = None) -> None:
 
     slider_l1.on_changed(_on_slider_change)
     slider_l2.on_changed(_on_slider_change)
+    slider_m1.on_changed(_on_slider_change)
+    slider_m2.on_changed(_on_slider_change)
     slider_grav.on_changed(_on_slider_change)
 
     # --- Animation callback ---
