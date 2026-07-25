@@ -127,9 +127,9 @@ def run_lissajous_3d(config: LissajousConfig | None = None) -> None:
             n_points=config.n_points,
         )
 
-        # Remove old line collection
-        if lc in ax.collections:
-            ax.collections.remove(lc)
+        # Remove all collections and re-add the new curve
+        while ax.collections:
+            ax.collections[0].remove()
 
         # Generate new curve
         new_points = generate_lissajous(new_config)
