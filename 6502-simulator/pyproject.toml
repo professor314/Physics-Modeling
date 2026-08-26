@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "6502-simulator"
+version = "0.1.0"
+description = "A complete MOS 6502 CPU simulator with assembler, debugger, and virtual LCD display. Inspired by Ben Eater's breadboard computer."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Sean Connolly"}
+]
+
+dependencies = [
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+viz = ["matplotlib>=3.7"]
+dev = ["pytest>=7.0", "ruff>=0.1"]
+
+[project.scripts]
+6502-sim = "cpu_6502.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cpu_6502*"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 99
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
