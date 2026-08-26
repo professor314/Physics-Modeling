@@ -15,6 +15,3 @@ pytest-cov>=4.0
 [notebook]
 jupyter
 ipywidgets
-
-[rubiks]
-kociemba

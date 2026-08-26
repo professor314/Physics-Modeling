@@ -1,2 +1,3 @@
 [console_scripts]
+physics-launcher = physics_modeling.launcher:main
 physics-modeling = physics_modeling.cli.main:main
